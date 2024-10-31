@@ -16,7 +16,7 @@ spec:
       values: ''
       parameters:
         - name: kong.proxy.type
-          value: LoadBalancer
+          value: ClusterIP
         - name: kong.proxy.annotations.\external-dns\.alpha\.kubernetes\.io/hostname
           value: k8s
     chart: kubernetes-dashboard
