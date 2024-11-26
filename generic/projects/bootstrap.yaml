@@ -18,4 +18,4 @@ spec:
   syncWindows:
     - kind: allow
       schedule: "* * * * *"
-      duration: "2m"
+      duration: "1m"
