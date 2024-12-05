@@ -19,3 +19,5 @@ spec:
     - kind: allow
       schedule: "* * * * *"
       duration: "1m"
+  policies:
+    p, bootstrap, applications, *, bootstrap/*, allow

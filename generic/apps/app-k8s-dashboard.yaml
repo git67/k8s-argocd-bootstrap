@@ -23,7 +23,7 @@ spec:
           value: k8s
     chart: kubernetes-dashboard
   sources: []
-  project: default
+  project: security
   syncPolicy:
     automated:
       prune: true

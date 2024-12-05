@@ -19,3 +19,5 @@ spec:
     - kind: allow
       schedule: "* * * * *"
       duration: "2m"
+  policies:
+    p, security, applications, *, security/*, allow
