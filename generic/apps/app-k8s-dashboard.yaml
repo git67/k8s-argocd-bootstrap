@@ -13,7 +13,7 @@ spec:
   source:
     path: ''
     repoURL: 'https://kubernetes.github.io/dashboard/'
-    targetRevision: 7.4.0
+    targetRevision: 7.10.0
     helm:
       values: ''
       parameters:
@@ -23,7 +23,7 @@ spec:
           value: k8s
     chart: kubernetes-dashboard
   sources: []
-  project: bootstrap
+  project: default
   syncPolicy:
     automated:
       prune: true
