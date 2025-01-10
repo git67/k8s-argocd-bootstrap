@@ -14,7 +14,7 @@ spec:
     targetRevision: 66.3.1
     helm:
       valueFiles:
-      - $values/generic/apps/prometheus-stack
+      - $values/generic/apps/prometheus-stack/values.yaml
       ignoreMissingValueFiles: true
   - repoURL: "https://github.com/git67/k8s-argocd-bootstrap.git"
     targetRevision: HEAD
