@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ingress-grafana
+  name: ingress-prometheus-stack-grafana
   namespace: prometheus-system
   annotations:
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
