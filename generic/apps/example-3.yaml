@@ -10,7 +10,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/git67/k8s-argocd-bootstrap.git
-    path: generic/apps/example/overlays/example-2
+    path: generic/apps/example/overlays/example-3
     targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
