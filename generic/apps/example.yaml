@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: web1
+  name: example
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -10,7 +10,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/git67/k8s-argocd-bootstrap.git
-    path: generic/apps/example/overlay
+    path: generic/apps/example/overlays
     targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
