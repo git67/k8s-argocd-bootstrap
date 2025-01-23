@@ -3,3 +3,4 @@ kind: Kustomization
 
 resources:
   - simple_ingress.yaml
+  - simple_web_deployment.yaml
