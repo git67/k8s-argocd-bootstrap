@@ -22,7 +22,7 @@ spec:
     ref: values
   destination:
     server: https://kubernetes.default.svc
-    namespace: prometheus-system
+    namespace: storage-system
   syncPolicy:
     automated:
       prune: true
