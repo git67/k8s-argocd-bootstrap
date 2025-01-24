@@ -1,0 +1,5 @@
+nfs:
+  path: /nfs
+  server: 192.168.56.30
+storageClass:
+  name: infra-nfs
