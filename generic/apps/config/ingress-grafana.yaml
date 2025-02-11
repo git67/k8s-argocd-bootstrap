@@ -24,6 +24,6 @@ spec:
         pathType: ImplementationSpecific
         backend:
           service:
-            name: prometheus-stack-grafana
+            name: kube-prom-stack-grafana
             port:
               number: 80
