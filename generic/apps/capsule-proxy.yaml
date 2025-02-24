@@ -11,7 +11,7 @@ spec:
   sources:
   - repoURL: https://projectcapsule.github.io/charts
     chart: "capsule-proxy"
-    targetRevision: 0.7.1
+    targetRevision: 0.9.1
     helm:
       valueFiles:
       - $values/generic/apps/capsule-proxy/values.yaml
