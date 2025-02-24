@@ -16,7 +16,7 @@ spec:
       valueFiles:
       - $values/capsule-proxy/values.yaml
       ignoreMissingValueFiles: true
-  - repoURL: https://github.com/hit67/k8s-argocd-bootstrap/generic/apps
+  - repoURL: https://github.com/git67/k8s-argocd-bootstrap/generic/apps
     targetRevision: HEAD
     ref: values
   destination:
