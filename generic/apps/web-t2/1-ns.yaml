@@ -1,0 +1,8 @@
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: web-t2
+  labels:
+    name: web-t2
+
