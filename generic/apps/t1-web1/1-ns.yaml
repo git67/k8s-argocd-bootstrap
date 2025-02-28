@@ -2,7 +2,7 @@
 kind: Namespace
 apiVersion: v1
 metadata:
-  name: t1-web
+  name: t1-web1
   labels:
-    name: t1-web
+    name: t1-web1
 
