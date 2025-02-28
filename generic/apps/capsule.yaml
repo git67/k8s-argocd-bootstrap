@@ -11,7 +11,7 @@ spec:
   source:
     repoURL: https://projectcapsule.github.io/charts
     chart: "capsule"
-    targetRevision: 0.7.0
+    targetRevision: 0.7.4
   destination:
     server: https://kubernetes.default.svc
     namespace: capsule-system
