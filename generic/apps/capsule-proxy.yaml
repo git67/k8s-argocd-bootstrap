@@ -1,0 +1,30 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: capsule-proxy
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:
+  - repoURL: https://projectcapsule.github.io/charts
+    chart: "capsule-proxy"
+    targetRevision: 0.9.1
+    helm:
+      valueFiles:
+      - $values/generic/apps/capsule-proxy/values.yaml
+      ignoreMissingValueFiles: true
+  - repoURL: https://github.com/git67/k8s-argocd-bootstrap
+    targetRevision: HEAD
+    ref: values
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: capsule-system
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
