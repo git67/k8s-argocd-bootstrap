@@ -2,19 +2,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: t1-web1
-  namespace: t1-argocd
+  name: t2-web1
+  namespace: t2-argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  project: t1-default
+  project: t2-default
   source:
     repoURL: https://github.com/git67/k8s-argocd-bootstrap.git
-    path: generic/apps/t1-web1
+    path: generic/apps/t2-web1
     targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
-    namespace: t1-web1
+    namespace: t2-web1
   syncPolicy:
     automated:
       prune: true
