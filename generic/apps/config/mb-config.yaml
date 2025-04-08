@@ -7,7 +7,6 @@ metadata:
 spec:
   ipAddressPools:
   - ip-pool-ingress
-  - ip-pool-services
 ---
 apiVersion: metallb.io/v1beta1
 kind: IPAddressPool
@@ -16,19 +15,8 @@ metadata:
   namespace: metallb-system
 spec:
   addresses:
-  - 192.168.56.200-192.168.56.205
+  - 192.168.56.200
   avoidBuggyIPs: true
   serviceAllocation:
     namespaces:
       - ingress-nginx
----
-apiVersion: metallb.io/v1beta1
-kind: IPAddressPool
-metadata:
-  name: ip-pool-services
-  namespace: metallb-system
-spec:
-  addresses:
-  - 192.168.56.206-192.168.56.210
-  avoidBuggyIPs: true
-
