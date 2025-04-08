@@ -10,7 +10,7 @@ spec:
   project: t2-default
   source:
     repoURL: https://github.com/git67/k8s-argocd-bootstrap.git
-    path: generic/apps/t2-web1
+    path: generic/tenants/t2-web1
     targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
