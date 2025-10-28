@@ -2,24 +2,32 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
+  name: cert-manager
+  namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "3"
   finalizers:
     - resources-finalizer.argocd.argoproj.io
-  name: app-cert-manager
-  namespace: argocd
 spec:
   project: default
-  source:
-    repoURL: https://github.com/git67/k8s-argocd-bootstrap.git
-    path: generic/initial/cert-manager/
+  sources:
+  - repoURL: https://charts.jetstack.io
+    chart: "cert-manager"
+    targetRevision: 1.19.1
+    helm:
+      valueFiles:
+      - $values/generic/initial/cert-manager/values.yaml
+      ignoreMissingValueFiles: true
+  - repoURL: "https://github.com/git67/k8s-argocd-bootstrap.git"
     targetRevision: HEAD
+    ref: values
   destination:
     server: https://kubernetes.default.svc
-    namespace: default
+    namespace: cert-manager
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+      - ServerSideApply=true

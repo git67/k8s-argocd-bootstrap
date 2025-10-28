@@ -2,24 +2,32 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
+  namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "1"
   finalizers:
     - resources-finalizer.argocd.argoproj.io
   name: app-nginx-ingress-oss
-  namespace: argocd
 spec:
   project: default
-  source:
-    repoURL: https://github.com/git67/k8s-argocd-bootstrap.git
-    path: generic/initial/nginx-ingress-oss
+  sources:
+  - repoURL: https://helm.nginx.com/stable
+    chart: "nginx-ingress"
+    targetRevision: 2.3.1
+    helm:
+      valueFiles:
+      - $values/generic/initial/nginx-ingress-oss/values.yaml
+      ignoreMissingValueFiles: true
+  - repoURL: "https://github.com/git67/k8s-argocd-bootstrap.git"
     targetRevision: HEAD
+    ref: values
   destination:
     server: https://kubernetes.default.svc
-    namespace: default
+    namespace: ingress-nginx
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+      - ServerSideApply=true
