@@ -3,7 +3,8 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: nginx-ingress-oss
-
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
