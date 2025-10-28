@@ -6,7 +6,7 @@ metadata:
     argocd.argoproj.io/sync-wave: "9"
   finalizers:
     - resources-finalizer.argocd.argoproj.io
-  name: config
+  name: app-config
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
