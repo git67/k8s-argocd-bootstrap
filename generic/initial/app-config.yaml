@@ -8,8 +8,6 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
   name: app-config
   namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
