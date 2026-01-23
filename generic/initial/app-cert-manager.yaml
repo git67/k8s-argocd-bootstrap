@@ -5,13 +5,13 @@ metadata:
   name: app-cert-manager
   namespace: argocd
   finalizers:
-    - resources-finalizer.argocd.argoproj.io
+    - resources-finalizer.argocd.argoproj.io/background
 spec:
   project: default
   sources:
-  - repoURL: https://charts.jetstack.io
+  - repoURL: oci://quay.io/jetstack/charts/cert-manager
     chart: "cert-manager"
-    targetRevision: 1.19.1
+    targetRevision: 1.19.2
     helm:
       valueFiles:
       - $values/generic/initial/cert-manager/values.yaml
