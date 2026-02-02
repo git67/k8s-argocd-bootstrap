@@ -145,7 +145,7 @@ metadata:
 data:
   index.html: |
     <html>
-    <h1>i have no idea what iam doing </h1>
+    <h1>i have no idea what iam doing, yes indeed</h1>
     </html>
 ---
 apiVersion: v1
