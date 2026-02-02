@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
       - name: default-backend
-        image: nginx
+        image: nginx:1.28.1
         ports:
         - containerPort: 80
         volumeMounts:
