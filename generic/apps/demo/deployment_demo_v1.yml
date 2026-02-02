@@ -10,7 +10,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations: 
-    kubernetes.io/change-cause: 'v1 initial deployment'
+    kubernetes.io/change-cause: 'Release 1.29.1 - supi dupi'
   name: default-backend
   namespace: demo
   labels:
@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
       - name: default-backend
-        image: nginx:1.28.1
+        image: nginx:1.29.1
         ports:
         - containerPort: 80
         volumeMounts:
