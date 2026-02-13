@@ -3,14 +3,13 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: headlamp
-
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io/background
 spec:
   project: default
   sources:
-  - repoURL: https://kubernetes-sigs.github.io/headlamphttps://kubernetes-sigs.github.io/headlamp/
+  - repoURL: https://kubernetes-sigs.github.io/headlamp/
     chart: "headlamp"
     targetRevision: 0.40.0
     helm:
