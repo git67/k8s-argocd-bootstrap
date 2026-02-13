@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: self-signed
+    nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+  labels:
+    app.kubernetes.io/instance: config
+  name: headlamp-ingress
+  namespace: argocd
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: headlamp.hs.local
+    http:
+      paths:
+      - backend:
+          service:
+            name: headlamp
+            port:
+              name: https
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - headlamp.hs.local
