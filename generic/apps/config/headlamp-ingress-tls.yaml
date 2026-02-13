@@ -12,6 +12,7 @@ spec:
   tls:
   - hosts:
     - headlamp.hs.local
+    secretName: headlamp-secret
   rules:
   - host: headlamp.hs.local
     http:
