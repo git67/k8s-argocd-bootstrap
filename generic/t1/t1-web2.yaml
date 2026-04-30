@@ -5,12 +5,12 @@ metadata:
   name: t1-web2
   namespace: t1-argocd
   finalizers:
-    - resources-finalizer.argocd.argoproj.io
+    - resources-finalizer.argocd.argoproj.io/background
 spec:
   project: t1-default
   source:
     repoURL: https://github.com/git67/k8s-argocd-bootstrap.git
-    path: generic/tenants/t1-web2
+    path: generic/t1/t1-web2
     targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
