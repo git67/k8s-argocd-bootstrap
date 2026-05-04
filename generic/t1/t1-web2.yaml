@@ -21,3 +21,8 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+  ignoreDifferences:
+  - group: ""
+    kind: Namespace
+    jsonPointers:
+      - /metadata/labels/capsule.clastix.io~1tenant
