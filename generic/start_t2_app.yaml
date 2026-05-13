@@ -5,7 +5,7 @@ metadata:
   name: t2-apps
   namespace: t2-argocd
 spec:
-  project: default
+  project: t2-default
   source:
     repoURL: https://github.com/git67/k8s-argocd-bootstrap.git
     path: generic/t2
