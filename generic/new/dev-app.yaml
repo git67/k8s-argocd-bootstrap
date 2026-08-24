@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: tobi-root-chart
+  namespace: argocd
+  annotations:
+    notifications.argoproj.io/subscribe.on-sync-status.github: ""
+spec:
+  project: tobi
+  destination:
+    namespace: argocd
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    retry:
+      limit: 1
+      backoff:
+        duration: 1s
+        factor: 1
+        maxDuration: 1m
+    automated:
+      prune: false
+      allowEmpty: false
+      selfHeal: true
+    syncOptions:
+      - ApplyOutOfSyncOnly=true
+      - CreateNamespace=true
+      - PruneLast=true
+      - Validate=true
+      - RespectIgnoreDifferences=true
+  source:
+    path: generic/new/root-charts
+    repoURL: https://github.com/git67/k8s-argocd-bootstrap.git
+    targetRevision: main
+    helm:
+      valueFiles:
+        - dev-values.yaml

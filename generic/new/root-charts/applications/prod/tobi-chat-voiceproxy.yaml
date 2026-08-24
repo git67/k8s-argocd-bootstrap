@@ -1,0 +1,6 @@
+name: tobi-chat-voiceproxy
+enable: true
+namespace: tobichat-voiceproxy
+repoURL: https://github.com/git67/k8s-argocd-bootstrap.git
+revision: main
+path: apps-tobi/prod/tobi-chat-voiceproxy

@@ -1,0 +1,20 @@
+environment: dev
+
+defaults:
+  project: tobi
+
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+
+  annotations:
+    notifications.argoproj.io/subscribe.on-sync-status.github: ""
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: true
+
+  syncOptions:
+    - CreateNamespace=true
+

@@ -1,0 +1,53 @@
+{{- $root := . }}
+{{- $applicationFiles := $root.Files.Glob (printf "applications/%s/*.yaml" $root.Values.environment) }}
+{{- range $applicationPath, $_ := $applicationFiles }}
+{{- $app := fromYaml ($root.Files.Get $applicationPath) }}
+{{- if $app.enable }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ $app.name }}
+  namespace: argocd
+
+  {{- $finalizers := coalesce $app.finalizers $.Values.defaults.finalizers }}
+  {{- if $finalizers }}
+  finalizers:
+{{ toYaml $finalizers | indent 4 }}
+  {{- end }}
+
+  {{- $annotations := mergeOverwrite (dict) $.Values.defaults.annotations (default (dict) $app.annotations) }}
+  {{- if $annotations }}
+  annotations:
+{{ toYaml $annotations | indent 4 }}
+  {{- end }}
+
+spec:
+  project: {{ $app.project | default $.Values.defaults.project }}
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: {{ $app.namespace | default $app.name }}
+
+  {{- $sync := coalesce $app.syncPolicy (dict) }}
+  {{- $automated := coalesce $sync.automated (dict) }}
+  syncPolicy:
+    automated:
+      prune: {{ if hasKey $automated "prune" }}{{ $automated.prune }}{{ else }}{{ $.Values.defaults.syncPolicy.automated.prune }}{{ end }}
+      selfHeal: {{ if hasKey $automated "selfHeal" }}{{ $automated.selfHeal }}{{ else }}{{ $.Values.defaults.syncPolicy.automated.selfHeal }}{{ end }}
+      allowEmpty: {{ if hasKey $automated "allowEmpty" }}{{ $automated.allowEmpty }}{{ else }}{{ $.Values.defaults.syncPolicy.automated.allowEmpty }}{{ end }}
+
+  {{- $syncOptions := coalesce $app.syncOptions $.Values.defaults.syncOptions }}
+  {{- if $syncOptions }}
+    syncOptions:
+{{ toYaml $syncOptions | indent 6 }}
+  {{- end }}
+
+  source:
+    repoURL: {{ $app.repoURL }}
+    targetRevision: {{ $app.revision | default "HEAD" }}
+    path: {{ $app.path }}
+    directory:
+      recurse: true
+---
+{{- end }}
+{{- end }}
