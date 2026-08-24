@@ -1,12 +1,12 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: tobi-root-chart
+  name: root-chart
   namespace: argocd
   annotations:
     notifications.argoproj.io/subscribe.on-sync-status.github: ""
 spec:
-  project: tobi
+  project: dev
   destination:
     namespace: argocd
     server: https://kubernetes.default.svc
