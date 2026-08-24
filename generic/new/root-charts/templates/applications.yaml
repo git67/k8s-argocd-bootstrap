@@ -1,5 +1,5 @@
 {{- $root := . }}
-{{- $applicationFiles := $root.Files.Glob (printf "applications/%s/*.yaml" $root.Values.environment) }}
+{{- $applicationFiles := $root.Files.Glob (printf "../../apps/%s/*.yaml" $root.Values.environment) }}
 {{- range $applicationPath, $_ := $applicationFiles }}
 {{- $app := fromYaml ($root.Files.Get $applicationPath) }}
 {{- if $app.enable }}
