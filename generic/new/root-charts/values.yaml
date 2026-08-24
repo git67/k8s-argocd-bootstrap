@@ -1,0 +1,14 @@
+environment: ""
+
+defaults:
+  project: default
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations: {}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: false
+  syncOptions:
+    - CreateNamespace=true

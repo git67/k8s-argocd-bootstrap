@@ -1,6 +1,0 @@
-name: web2
-enable: true
-namespace: web2
-repoURL: https://github.com/git67/k8s-argocd-bootstrap.git
-revision: main
-path: generic/new/apps/prod/web2
