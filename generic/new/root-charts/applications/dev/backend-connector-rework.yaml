@@ -1,6 +1,0 @@
-name: backend-connector-rework
-enable: true
-namespace: backend-connector-rework
-repoURL: https://github.com/git67/k8s-argocd-bootstrap.git
-revision: main
-path: apps-tobi/dev/backend-connector-rework

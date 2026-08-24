@@ -1,7 +1,7 @@
 environment: dev
 
 defaults:
-  project: tobi
+  project: dev
 
   finalizers:
     - resources-finalizer.argocd.argoproj.io

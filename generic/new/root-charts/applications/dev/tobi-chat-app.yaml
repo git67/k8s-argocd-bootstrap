@@ -1,6 +1,0 @@
-name: tobi-chat-app
-enable: true
-namespace: tobi-chat-app
-repoURL: https://github.com/git67/k8s-argocd-bootstrap.git
-revision: main
-path: apps-tobi/dev/tobi-chat-app

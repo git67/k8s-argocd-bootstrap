@@ -1,6 +1,6 @@
-name: tobi-chat-app
+name: web1
 enable: true
-namespace: tobichat-app
+namespace: web1
 repoURL: https://github.com/git67/k8s-argocd-bootstrap.git
 revision: main
-path: apps-tobi/prod/tobi-chat-app
+path: generic/new/apps/dev/web1

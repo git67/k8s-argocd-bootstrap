@@ -1,6 +1,6 @@
-name: tobi-chat-web
+name: web2
 enable: true
-namespace: tobichat-web
+namespace: web2
 repoURL: https://github.com/git67/k8s-argocd-bootstrap.git
 revision: main
-path: apps-tobi/prod/tobi-chat-web
+path: generic/new/apps/prod/web2

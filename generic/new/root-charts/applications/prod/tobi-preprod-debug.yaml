@@ -1,6 +1,0 @@
-name: tobi-preprod-debug
-enable: true
-namespace: tobichat-preprod-debug
-repoURL: https://github.com/git67/k8s-argocd-bootstrap.git
-revision: main
-path: apps-tobi/prod/tobi-preprod-debug

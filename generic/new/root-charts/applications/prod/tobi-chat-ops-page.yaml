@@ -1,6 +1,0 @@
-name: tobi-chat-ops-page
-enable: true
-namespace: tobichat-ops-page
-repoURL: https://github.com/git67/k8s-argocd-bootstrap.git
-revision: main
-path: apps-tobi/prod/tobi-chat-ops-page
