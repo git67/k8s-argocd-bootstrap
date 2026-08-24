@@ -1,10 +1,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: tobi
+  name: prod
   namespace: argocd
 spec:
-  description: TOBi PROD platform and applications
+  description: PROD platform and applications
 
   sourceRepos:
     - https://github.com/git67/k8s-argocd-bootstrap.git
