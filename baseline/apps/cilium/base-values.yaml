@@ -1,4 +1,5 @@
 MTU: 0
+rollOutCiliumPods: true
 autoDirectNodeRoutes: false
 bandwidthManager:
   bbr: false
@@ -108,6 +109,7 @@ l2announcements:
 loadBalancer:
   mode: snat
 operator:
+  rollOutPods: true
   extraArgs: []
   extraVolumeMounts: []
   extraVolumes: []
