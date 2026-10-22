@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cilium
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+spec:
+  project: default
+  sources:
+    - repoURL: https://helm.cilium.io/
+      chart: cilium
+      targetRevision: 1.20.3
+      helm:
+        releaseName: cilium
+        valueFiles:
+          - $values/baseline/apps/cilium/gateway-values.yaml
+          - $values/baseline/apps/cilium/hubble-values.yaml
+    - repoURL: https://github.com/git67/k8s-argocd-bootstrap.git
+      targetRevision: HEAD
+      ref: values
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kube-system
+  syncPolicy:
+    syncOptions:
+      - ServerSideApply=true
