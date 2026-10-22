@@ -14,7 +14,7 @@ spec:
       helm:
         releaseName: cilium
         valueFiles:
-          - $values/baseline/apps/cilium/gateway-values.yaml
+          - $values/baseline/apps/cilium/base-values.yaml
           - $values/baseline/apps/cilium/hubble-values.yaml
     - repoURL: https://github.com/git67/k8s-argocd-bootstrap.git
       targetRevision: HEAD
