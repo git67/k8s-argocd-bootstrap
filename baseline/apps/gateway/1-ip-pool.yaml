@@ -1,0 +1,27 @@
+apiVersion: cilium.io/v2
+kind: CiliumLoadBalancerIPPool
+metadata:
+  name: ip-pool
+  namespace: kube-system
+spec:
+  # Reserviert exakt diese IP für das Gateway
+  blocks:
+    - cidr: 192.168.56.200/32
+
+---
+apiVersion: cilium.io/v2alpha1
+kind: CiliumL2AnnouncementPolicy
+metadata:
+  name: gateway-l2-policy
+  namespace: kube-system
+spec:
+  loadBalancerIPs: true
+  # Nutze auf allen Nodes das Interface im 192.168.56.0/24-Netz.
+  interfaces:
+    - ^enp0s3$
+  nodeSelector:
+    matchExpressions:
+      - key: kubernetes.io/os
+        operator: In
+        values:
+          - linux
