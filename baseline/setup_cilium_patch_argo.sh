@@ -39,12 +39,3 @@ cilium hubble port-forward &
 hubble status
 hubble observe --namespace argocd --follow
 hubble observe --namespace kube-system --protocol http --follow
-
-
-kubectl patch configmap argocd-cmd-params-cm -n argocd \
-  --type merge \
-  -p '{"data":{"server.insecure":"true"}}'
-
-kubectl rollout restart deployment argocd-server -n argocd
-
-kubectl logs -n argocd -l app.kubernetes.io/name=argocd-server | head -20

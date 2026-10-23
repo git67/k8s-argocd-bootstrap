@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: argocd-server-restart
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation,HookSucceeded
+spec:
+  backoffLimit: 3
+  activeDeadlineSeconds: 120
+  template:
+    spec:
+      serviceAccountName: argocd-server-restart
+      restartPolicy: Never
+      containers:
+        - name: restart
+          image: registry.k8s.io/kubectl:v1.34.0
+          command:
+            - kubectl
+          args:
+            - -n
+            - argocd
+            - rollout
+            - restart
+            - deployment/argocd-server
