@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: baseline-gateway
+  name: 5-gateway
   namespace: argocd
   annotations:
     # Erstellt das Gateway vor allen HTTPRoute-Applications.

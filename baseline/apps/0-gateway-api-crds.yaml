@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: baseline-gateway-api-crds
+  name: 0-gateway-api-crds
   namespace: argocd
   annotations:
     # Erste Wave der Child-Apps; die Root-App installiert ihre Health-Prüfung in Wave -3.

@@ -1,0 +1,6 @@
+# Helm-Werte für die cert-manager-Installation.
+crds:
+  # Installiert die cert-manager-CRDs zusammen mit dem Helm-Chart.
+  enabled: true
+  # Behält die CRDs bei, wenn das Helm-Chart entfernt wird.
+  keep: true

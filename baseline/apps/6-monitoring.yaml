@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: baseline-monitoring
+  name: 6-monitoring
   namespace: argocd
   annotations:
     # Installiert Grafana vor dessen Route und nach den grundlegenden Netzwerk-Applications.

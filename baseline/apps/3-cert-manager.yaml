@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: baseline-cert-manager
+  name: 3-cert-manager
   namespace: argocd
   annotations:
     # Installiert cert-manager vor der Issuer-Application in der nächsten Wave.
@@ -11,18 +11,17 @@ metadata:
     - resources-finalizer.argocd.argoproj.io/background
 spec:
   project: default
-  source:
-    repoURL: oci://quay.io/jetstack/charts/cert-manager
-    chart: cert-manager
-    # Chart-Version; muss mit der Helm-Chart-Version übereinstimmen.
-    targetRevision: 1.19.2
-    helm:
-      parameters:
-        # Installiert die cert-manager-API-Typen und behält sie bei, wenn das Chart entfernt wird.
-        - name: crds.enabled
-          value: "true"
-        - name: crds.keep
-          value: "true"
+  sources:
+    - repoURL: oci://quay.io/jetstack/charts/cert-manager
+      chart: cert-manager
+      # Chart-Version; muss mit der Helm-Chart-Version übereinstimmen.
+      targetRevision: 1.19.2
+      helm:
+        valueFiles:
+          - $values/baseline/apps/cert-manager/values.yaml
+    - repoURL: https://github.com/git67/k8s-argocd-bootstrap.git
+      targetRevision: HEAD
+      ref: values
   destination:
     server: https://kubernetes.default.svc
     # Die Controller und der Webhook von cert-manager laufen in diesem Namespace.

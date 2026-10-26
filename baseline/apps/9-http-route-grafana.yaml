@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: baseline-http-route-grafana
+  name: 9-http-route-grafana
   namespace: argocd
   annotations:
     # Wave der Route-Application: Monitoring und das gemeinsam genutzte Gateway sind Voraussetzungen.

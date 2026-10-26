@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: baseline-http-route-hubble-ui
+  name: 8-http-route-hubble-ui
   namespace: argocd
   annotations:
     # Wave der Route-Application: Cilium, Gateway-API-CRDs und das gemeinsam genutzte Gateway sind Voraussetzungen.

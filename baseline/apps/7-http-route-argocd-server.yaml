@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: baseline-http-route-argocd-server
+  name: 7-http-route-argocd-server
   namespace: argocd
   annotations:
     # Die Argo-CD-Route folgt auf die HTTP-Serverkonfiguration und das Gateway.

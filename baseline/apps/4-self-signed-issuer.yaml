@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: baseline-self-signed-issuer
+  name: 4-self-signed-issuer
   namespace: argocd
   annotations:
     # Wartet, bis die cert-manager-Application fehlerfrei ist.

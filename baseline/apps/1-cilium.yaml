@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cilium
+  name: 1-cilium
   namespace: argocd
   annotations:
     # Wartet, bis die Gateway-API-CRD-Application fehlerfrei ist.

@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: baseline-argocd-server-config
+  name: 2-argocd-server-config
   namespace: argocd
   annotations:
     # Wird nach Cilium angewendet und muss vor dem Erstellen der Argo-CD-HTTP-Route bereitstehen.
