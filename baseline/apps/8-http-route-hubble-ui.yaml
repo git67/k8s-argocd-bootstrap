@@ -1,20 +1,24 @@
+# Publishes the Hubble UI at hubble.hs.local through the shared Gateway.
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: baseline-http-route-hubble-ui
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "3"
+    # Route app wave: Cilium, Gateway API CRDs and the shared Gateway are prerequisites.
+    argocd.argoproj.io/sync-wave: "6"
   finalizers:
     - resources-finalizer.argocd.argoproj.io/background
 spec:
   project: default
   source:
+    # Contains the HTTPRoute for the Hubble UI Service.
     repoURL: https://github.com/git67/k8s-argocd-bootstrap.git
     path: baseline/apps/http-route-hubble-ui
     targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
+    # Hubble UI is installed by Cilium in kube-system.
     namespace: kube-system
   syncPolicy:
     automated:

@@ -1,0 +1,31 @@
+# Restores Application health assessment so app-of-apps sync waves wait for child apps.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-cm
+  namespace: argocd
+  labels:
+    app.kubernetes.io/name: argocd-cm
+    app.kubernetes.io/part-of: argocd
+  annotations:
+    # Apply the health check before creating child Applications in later waves.
+    argocd.argoproj.io/sync-wave: "-3"
+data:
+  # A child app is ready only once it is synced and its managed resources are healthy.
+  resource.customizations.health.argoproj.io_Application: |
+    hs = {}
+    hs.status = "Progressing"
+    hs.message = ""
+    if obj.status == nil then
+      return hs
+    end
+    if obj.status.operationState ~= nil and obj.status.operationState.phase == "Failed" then
+      hs.status = "Degraded"
+      hs.message = obj.status.operationState.message or "Child Application sync failed"
+      return hs
+    end
+    if obj.status.sync ~= nil and obj.status.sync.status == "Synced" and obj.status.health ~= nil then
+      hs.status = obj.status.health.status
+      hs.message = obj.status.health.message or ""
+    end
+    return hs

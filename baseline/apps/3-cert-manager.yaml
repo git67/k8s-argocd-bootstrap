@@ -1,10 +1,12 @@
+# Installs cert-manager and its CRDs into the cert-manager namespace.
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: baseline-cert-manager
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "0"
+    # Install cert-manager before the issuer application in the next wave.
+    argocd.argoproj.io/sync-wave: "1"
   finalizers:
     - resources-finalizer.argocd.argoproj.io/background
 spec:
@@ -12,20 +14,24 @@ spec:
   source:
     repoURL: oci://quay.io/jetstack/charts/cert-manager
     chart: cert-manager
+    # Chart release; keep aligned with the Helm chart version.
     targetRevision: 1.19.2
     helm:
       parameters:
+        # Install cert-manager API types and retain them if the chart is removed.
         - name: crds.enabled
           value: "true"
         - name: crds.keep
           value: "true"
   destination:
     server: https://kubernetes.default.svc
+    # cert-manager controllers and webhook run in this namespace.
     namespace: cert-manager
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
     syncOptions:
+      # Create the controller namespace and apply CRDs server-side.
       - CreateNamespace=true
       - ServerSideApply=true

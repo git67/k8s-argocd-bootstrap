@@ -1,10 +1,15 @@
+# Minimal kube-prometheus-stack overrides for the baseline monitoring app.
 grafana:
+  # Deploy Grafana; chart-generated admin credentials are stored in a Kubernetes Secret.
   enabled: true
   service:
+    # Expose only inside the cluster; the Gateway routes external requests.
     type: ClusterIP
 
 prometheus:
+  # Deploy Prometheus.
   enabled: true
 
 alertmanager:
+  # Deploy Alertmanager.
   enabled: true

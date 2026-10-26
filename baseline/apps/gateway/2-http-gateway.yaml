@@ -1,17 +1,21 @@
+# Shared Cilium-managed HTTP entrypoint for the baseline HTTPRoutes.
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
   name: http-gateway
   namespace: kube-system
   annotations:
-    # Sagt Cilium, welche IP für den LoadBalancer genutzt werden soll
+    # Request the single address configured in the Cilium IP pool.
     io.cilium/lb-ipam-ips: "192.168.56.200"
 spec:
+  # Cilium is the Gateway API implementation.
   gatewayClassName: cilium
   listeners:
     - name: http
+      # HTTP only; the self-signed issuer is not used until a TLS listener/certificate is configured.
       protocol: HTTP
       port: 80
       allowedRoutes:
         namespaces:
+          # Allow HTTPRoutes from argocd, kube-system and monitoring.
           from: All
