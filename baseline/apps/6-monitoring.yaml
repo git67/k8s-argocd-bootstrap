@@ -1,11 +1,11 @@
-# Installs Prometheus, Alertmanager, and Grafana using kube-prometheus-stack.
+# Installiert Prometheus, Alertmanager und Grafana mithilfe von kube-prometheus-stack.
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: baseline-monitoring
   namespace: argocd
   annotations:
-    # Install Grafana before its route; this also follows core networking apps.
+    # Installiert Grafana vor dessen Route und nach den grundlegenden Netzwerk-Applications.
     argocd.argoproj.io/sync-wave: "4"
   finalizers:
     - resources-finalizer.argocd.argoproj.io/background
@@ -14,7 +14,7 @@ spec:
   sources:
     - repoURL: https://prometheus-community.github.io/helm-charts
       chart: kube-prometheus-stack
-      # Helm chart release; the values file enables Grafana, Prometheus and Alertmanager.
+      # Helm-Chart-Version; die Values-Datei aktiviert Grafana, Prometheus und Alertmanager.
       targetRevision: 92.11.0
       helm:
         releaseName: baseline-monitoring
@@ -25,7 +25,7 @@ spec:
       ref: values
   destination:
     server: https://kubernetes.default.svc
-    # Monitoring components and the Grafana Service are installed here.
+    # Monitoring-Komponenten und der Grafana-Service werden hier installiert.
     namespace: monitoring
   syncPolicy:
     automated:

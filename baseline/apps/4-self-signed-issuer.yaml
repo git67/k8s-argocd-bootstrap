@@ -1,24 +1,24 @@
-# Creates the cluster-wide self-signed issuer after cert-manager and its CRDs.
+# Erstellt nach cert-manager und dessen CRDs den clusterweiten Self-Signed-Issuer.
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: baseline-self-signed-issuer
   namespace: argocd
   annotations:
-    # Wait for the cert-manager Application to report healthy.
+    # Wartet, bis die cert-manager-Application fehlerfrei ist.
     argocd.argoproj.io/sync-wave: "2"
   finalizers:
     - resources-finalizer.argocd.argoproj.io/background
 spec:
   project: default
   source:
-    # Contains the ClusterIssuer resource named "self-signed".
+    # Enthält die ClusterIssuer-Ressource mit dem Namen "self-signed".
     repoURL: https://github.com/git67/k8s-argocd-bootstrap.git
     path: baseline/apps/self-signed-issuer
     targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
-    # ClusterIssuer is cluster-scoped; destination namespace is not applied to it.
+    # ClusterIssuer gilt clusterweit; der Ziel-Namespace wird darauf nicht angewendet.
     namespace: cert-manager
   syncPolicy:
     automated:

@@ -1,6 +1,6 @@
 ---
-# Root app-of-apps: discovers and manages all Application manifests in baseline/apps.
-# A managed argocd-cm health check lets sync waves wait for child apps to sync and become healthy.
+# Root-Anwendung im App-of-Apps-Muster: findet und verwaltet alle Application-Manifeste in baseline/apps.
+# Eine verwaltete argocd-cm-Health-Prüfung lässt Sync-Waves warten, bis Child-Apps synchronisiert und fehlerfrei sind.
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -11,13 +11,13 @@ metadata:
 spec:
   project: default
   source:
-    # Git repository, directory containing child Applications, and tracked revision.
+    # Git-Repository, Verzeichnis der Child-Applications und zu verwendender Versionsstand.
     repoURL: https://github.com/git67/k8s-argocd-bootstrap.git
     path: baseline/apps
     targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
-    # Child Application objects are created in the Argo CD control namespace.
+    # Die Child-Application-Objekte werden im Steuerungs-Namespace von Argo CD erstellt.
     namespace: argocd
   syncPolicy:
     automated:

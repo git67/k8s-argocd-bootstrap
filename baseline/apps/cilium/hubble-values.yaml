@@ -1,15 +1,15 @@
-# Enable Hubble observability, relay, UI, and the selected flow metrics.
+# Aktiviert Hubble-Beobachtbarkeit, Relay, Oberfläche und die ausgewählten Flow-Metriken.
 hubble:
-  # Turn on Hubble flow collection.
+  # Aktiviert die Erfassung von Hubble-Flows.
   enabled: true
   relay:
-    # Provide the aggregation service consumed by the UI.
+    # Stellt den Aggregationsdienst bereit, den die Oberfläche verwendet.
     enabled: true
   ui:
-    # Deploy the Hubble web interface.
+    # Stellt die Hubble-Weboberfläche bereit.
     enabled: true
   metrics:
-    # Metrics exposed from Hubble flows; these are metric groups, not ports.
+    # Aus Hubble-Flows bereitgestellte Metriken; dies sind Metrikgruppen, keine Ports.
     enabled:
       - dns
       - drop

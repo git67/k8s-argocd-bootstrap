@@ -1,24 +1,24 @@
-# Configures Argo CD for HTTP behind the in-cluster Gateway and restarts its server.
+# Konfiguriert Argo CD für HTTP hinter dem clusterinternen Gateway und startet den Server neu.
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: baseline-argocd-server-config
   namespace: argocd
   annotations:
-    # Applied after Cilium; required before creating the Argo CD HTTP route.
+    # Wird nach Cilium angewendet und muss vor dem Erstellen der Argo-CD-HTTP-Route bereitstehen.
     argocd.argoproj.io/sync-wave: "0"
   finalizers:
     - resources-finalizer.argocd.argoproj.io/background
 spec:
   project: default
   source:
-    # This path contains the ConfigMap, least-privilege restart RBAC and PostSync job.
+    # Dieses Verzeichnis enthält die ConfigMap, die Restart-RBAC mit minimalen Rechten und den PostSync-Job.
     repoURL: https://github.com/git67/k8s-argocd-bootstrap.git
     path: baseline/apps/argocd-server-config
     targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
-    # Argo CD server configuration and restart resources live in its namespace.
+    # Die Argo-CD-Serverkonfiguration und Neustart-Ressourcen liegen in dessen Namespace.
     namespace: argocd
   syncPolicy:
     automated:

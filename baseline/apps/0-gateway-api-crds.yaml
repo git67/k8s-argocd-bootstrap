@@ -1,18 +1,18 @@
-# Installs the Gateway API CRDs required by Cilium 1.20 before Cilium starts.
+# Installiert vor dem Start von Cilium die von Cilium 1.20 benötigten Gateway-API-CRDs.
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: baseline-gateway-api-crds
   namespace: argocd
   annotations:
-    # First child-app wave; the root app installs its health check at wave -3.
+    # Erste Wave der Child-Apps; die Root-App installiert ihre Health-Prüfung in Wave -3.
     argocd.argoproj.io/sync-wave: "-2"
   finalizers:
     - resources-finalizer.argocd.argoproj.io/background
 spec:
   project: default
   source:
-    # Pin the upstream CRD definitions to the version supported by Cilium 1.20.
+    # Bindet die CRD-Definitionen aus dem Upstream auf die von Cilium 1.20 unterstützte Version fest.
     repoURL: https://github.com/kubernetes-sigs/gateway-api.git
     targetRevision: v1.6.3
     path: config/crd/standard
@@ -21,9 +21,9 @@ spec:
     namespace: default
   syncPolicy:
     automated:
-      # Retain cluster API definitions if this Application is removed.
+      # Behält die clusterweiten API-Definitionen bei, wenn diese Application entfernt wird.
       prune: false
       selfHeal: true
     syncOptions:
-      # CRDs exceed client-side apply annotation limits.
+      # CRDs überschreiten die Größenbeschränkung für Annotationen bei clientseitigem Apply.
       - ServerSideApply=true

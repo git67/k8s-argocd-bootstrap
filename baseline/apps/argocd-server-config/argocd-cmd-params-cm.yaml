@@ -1,9 +1,9 @@
-# Argo CD server setting: serve HTTP internally because the Gateway backend uses Service port 80.
+# Argo-CD-Servereinstellung: intern HTTP verwenden, da das Gateway den Service-Port 80 nutzt.
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: argocd-cmd-params-cm
   namespace: argocd
 data:
-  # TLS termination is not configured at the Gateway; do not expose this setting beyond the trusted network.
+  # Am Gateway ist keine TLS-Terminierung eingerichtet; diese Einstellung darf nicht außerhalb des vertrauenswürdigen Netzwerks bereitgestellt werden.
   server.insecure: "true"

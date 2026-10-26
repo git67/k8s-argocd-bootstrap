@@ -1,11 +1,11 @@
 ---
-# Cluster-wide address pool and L2 advertisement policy for the Gateway Service.
+# Clusterweiter Adresspool und L2-Ankündigungsrichtlinie für den Gateway-Service.
 apiVersion: cilium.io/v2
 kind: CiliumLoadBalancerIPPool
 metadata:
   name: ip-pool
 spec:
-  # The /32 reserves exactly the Gateway's LoadBalancer IP.
+  # Das /32 reserviert genau die LoadBalancer-IP des Gateways.
   blocks:
     - cidr: 192.168.56.200/32
 
@@ -15,12 +15,12 @@ kind: CiliumL2AnnouncementPolicy
 metadata:
   name: gateway-l2-policy
 spec:
-  # Select services of type LoadBalancer for L2 announcement.
+  # Wählt Services vom Typ LoadBalancer für die L2-Ankündigung aus.
   loadBalancerIPs: true
-  # Node interface on the 192.168.56.0/24 network; must match the actual host NIC.
+  # Netzwerkschnittstelle des Nodes im Netz 192.168.56.0/24; muss der tatsächlichen Host-Schnittstelle entsprechen.
   interfaces:
     - ^enp0s3$
-  # Apply only to Linux Kubernetes nodes.
+  # Gilt nur für Linux-Kubernetes-Nodes.
   nodeSelector:
     matchExpressions:
       - key: kubernetes.io/os

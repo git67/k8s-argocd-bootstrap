@@ -1,4 +1,4 @@
-# Routes plain HTTP for argocd.hs.local to the Argo CD server Service.
+# Leitet unverschlüsseltes HTTP für argocd.hs.local an den Argo-CD-Server-Service weiter.
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
@@ -7,7 +7,7 @@ metadata:
 spec:
   parentRefs:
     - name: http-gateway
-      # Gateway is shared and lives in kube-system.
+      # Das gemeinsam genutzte Gateway liegt in kube-system.
       namespace: kube-system
   hostnames:
     - "argocd.hs.local"
@@ -18,5 +18,5 @@ spec:
             value: /
       backendRefs:
         - name: argocd-server
-          # Service port 80 is used with server.insecure=true in the config app.
+          # Service-Port 80 wird mit server.insecure=true aus der Konfigurations-Application verwendet.
           port: 80

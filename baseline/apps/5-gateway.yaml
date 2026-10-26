@@ -1,24 +1,24 @@
-# Creates the Cilium LoadBalancer IP/L2 policy and the shared HTTP Gateway.
+# Erstellt den Cilium-LoadBalancer-IP-Pool, die L2-Richtlinie und das gemeinsam genutzte HTTP-Gateway.
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: baseline-gateway
   namespace: argocd
   annotations:
-    # Create the Gateway before any HTTPRoute applications.
+    # Erstellt das Gateway vor allen HTTPRoute-Applications.
     argocd.argoproj.io/sync-wave: "3"
   finalizers:
     - resources-finalizer.argocd.argoproj.io/background
 spec:
   project: default
   source:
-    # Contains the IP pool, L2 announcement policy, and Gateway listener.
+    # Enthält den IP-Pool, die L2-Announcement-Richtlinie und den Gateway-Listener.
     repoURL: https://github.com/git67/k8s-argocd-bootstrap.git
     path: baseline/apps/gateway
     targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
-    # Cilium CRDs and the Gateway are installed/managed from kube-system.
+    # Cilium-CRDs und Gateway werden aus dem Namespace kube-system installiert bzw. verwaltet.
     namespace: kube-system
   syncPolicy:
     automated:

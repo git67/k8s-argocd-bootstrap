@@ -1,12 +1,12 @@
 ---
-# Service account used only by the PostSync job that restarts argocd-server.
+# ServiceAccount, der ausschließlich vom PostSync-Job zum Neustart von argocd-server verwendet wird.
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: argocd-server-restart
   namespace: argocd
 ---
-# Namespace-scoped permission to read and patch only the argocd-server Deployment.
+# Auf den Namespace beschränkte Berechtigung, ausschließlich das argocd-server-Deployment zu lesen und zu ändern.
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
@@ -19,12 +19,12 @@ rules:
       - deployments
     resourceNames:
       - argocd-server
-    # get is used by kubectl; patch performs the rollout-restart annotation update.
+    # kubectl verwendet get; patch aktualisiert die Annotation für den Rollout-Neustart.
     verbs:
       - get
       - patch
 ---
-# Binds the restart Role only to the dedicated restart ServiceAccount.
+# Bindet die Neustart-Rolle ausschließlich an den dafür vorgesehenen Neustart-ServiceAccount.
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:

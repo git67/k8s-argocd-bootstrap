@@ -1,9 +1,9 @@
-# Cluster-wide issuer for creating self-signed certificates.
-# It does not become active on a route until a Certificate or TLS listener references it.
+# Clusterweiter Issuer zum Erstellen selbstsignierter Zertifikate.
+# Er wird für eine Route erst verwendet, wenn ein Certificate oder TLS-Listener darauf verweist.
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
   name: self-signed
 spec:
-  # Use cert-manager's built-in self-signed issuer implementation.
+  # Verwendet die integrierte Self-Signed-Issuer-Implementierung von cert-manager.
   selfSigned: {}

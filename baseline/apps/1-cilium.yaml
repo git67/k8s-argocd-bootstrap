@@ -1,18 +1,18 @@
-# Installs Cilium and enables its Gateway API and Hubble controllers.
+# Installiert Cilium und aktiviert dessen Gateway-API- und Hubble-Controller.
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: cilium
   namespace: argocd
   annotations:
-    # Wait until the Gateway API CRD application is healthy.
+    # Wartet, bis die Gateway-API-CRD-Application fehlerfrei ist.
     argocd.argoproj.io/sync-wave: "-1"
 spec:
   project: default
   sources:
     - repoURL: https://helm.cilium.io/
       chart: cilium
-      # Keep the Cilium chart version explicit for reproducible cluster networking.
+      # Legt die Cilium-Chart-Version explizit fest, damit die Cluster-Netzwerkkonfiguration reproduzierbar bleibt.
       targetRevision: 1.20.3
       helm:
         releaseName: cilium
@@ -31,5 +31,5 @@ spec:
       selfHeal: true
       allowEmpty: false
     syncOptions:
-      # Cilium renders large CRDs that are safer to apply server-side.
+      # Cilium erzeugt große CRDs, die sicherer serverseitig angewendet werden.
       - ServerSideApply=true

@@ -1,21 +1,21 @@
-# Shared Cilium-managed HTTP entrypoint for the baseline HTTPRoutes.
+# Gemeinsam genutzter, von Cilium verwalteter HTTP-Einstiegspunkt für die HTTPRoutes der Baseline.
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
   name: http-gateway
   namespace: kube-system
   annotations:
-    # Request the single address configured in the Cilium IP pool.
+    # Fordert die einzelne im Cilium-IP-Pool konfigurierte Adresse an.
     io.cilium/lb-ipam-ips: "192.168.56.200"
 spec:
-  # Cilium is the Gateway API implementation.
+  # Cilium implementiert die Gateway API.
   gatewayClassName: cilium
   listeners:
     - name: http
-      # HTTP only; the self-signed issuer is not used until a TLS listener/certificate is configured.
+      # Nur HTTP; der Self-Signed-Issuer wird erst mit einem TLS-Listener bzw. Zertifikat verwendet.
       protocol: HTTP
       port: 80
       allowedRoutes:
         namespaces:
-          # Allow HTTPRoutes from argocd, kube-system and monitoring.
+          # Erlaubt HTTPRoutes aus argocd, kube-system und monitoring.
           from: All

@@ -1,4 +1,4 @@
-# Restores Application health assessment so app-of-apps sync waves wait for child apps.
+# Stellt die Health-Bewertung für Applications wieder her, damit Sync-Waves des App-of-Apps-Musters auf Child-Apps warten.
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -8,10 +8,10 @@ metadata:
     app.kubernetes.io/name: argocd-cm
     app.kubernetes.io/part-of: argocd
   annotations:
-    # Apply the health check before creating child Applications in later waves.
+    # Wendet die Health-Prüfung an, bevor Child-Applications in späteren Waves erstellt werden.
     argocd.argoproj.io/sync-wave: "-3"
 data:
-  # A child app is ready only once it is synced and its managed resources are healthy.
+  # Eine Child-App gilt erst als bereit, wenn sie synchronisiert und ihre verwalteten Ressourcen fehlerfrei sind.
   resource.customizations.health.argoproj.io_Application: |
     hs = {}
     hs.status = "Progressing"

@@ -1,12 +1,12 @@
-# Cilium chart settings for the Gateway API controller and bare-metal networking.
+# Cilium-Chart-Einstellungen für den Gateway-API-Controller und Bare-Metal-Netzwerke.
 gatewayAPI:
-  # Enable Cilium's Gateway API controller; required CRDs are installed separately.
+  # Aktiviert Ciliums Gateway-API-Controller; die benötigten CRDs werden separat installiert.
   enabled: true
 ipv4:
-  # Enable IPv4 datapath and LoadBalancer address allocation.
+  # Aktiviert den IPv4-Datenpfad und die LoadBalancer-Adressvergabe.
   enabled: true
-# Replace kube-proxy with Cilium's eBPF service handling.
+# Ersetzt kube-proxy durch Ciliums eBPF-Dienstverarbeitung.
 kubeProxyReplacement: "true"
 l2announcements:
-  # Advertise LoadBalancer IPs on the selected node interface using L2.
+  # Kündigt LoadBalancer-IP-Adressen über L2 auf der ausgewählten Node-Schnittstelle an.
   enabled: true

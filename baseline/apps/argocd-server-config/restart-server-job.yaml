@@ -1,16 +1,16 @@
 ---
-# Restarts argocd-server after the ConfigMap change so server.insecure takes effect.
+# Startet argocd-server nach der ConfigMap-Änderung neu, damit server.insecure wirksam wird.
 apiVersion: batch/v1
 kind: Job
 metadata:
   name: argocd-server-restart
   namespace: argocd
   annotations:
-    # Run after sync; replace any previous completed hook and delete successful jobs.
+    # Wird nach der Synchronisierung ausgeführt; ersetzt vorherige Hooks und löscht erfolgreiche Jobs.
     argocd.argoproj.io/hook: PostSync
     argocd.argoproj.io/hook-delete-policy: BeforeHookCreation,HookSucceeded
 spec:
-  # Retry transient kubectl failures three times and cap the job runtime at two minutes.
+  # Wiederholt vorübergehende kubectl-Fehler dreimal und begrenzt die Laufzeit des Jobs auf zwei Minuten.
   backoffLimit: 3
   activeDeadlineSeconds: 120
   template:
@@ -19,12 +19,12 @@ spec:
       restartPolicy: Never
       containers:
         - name: restart
-          # Pin kubectl to the cluster's Kubernetes minor version.
+          # Bindet kubectl an die Kubernetes-Nebenversion des Clusters.
           image: registry.k8s.io/kubectl:v1.34.0
           command:
             - kubectl
           args:
-            # Restart only the Argo CD server Deployment in its namespace.
+            # Startet ausschließlich das Argo-CD-Server-Deployment in dessen Namespace neu.
             - -n
             - argocd
             - rollout

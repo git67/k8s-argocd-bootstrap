@@ -1,4 +1,4 @@
-# Routes plain HTTP for hubble.hs.local to Cilium's Hubble UI Service.
+# Leitet unverschlüsseltes HTTP für hubble.hs.local an den Hubble-UI-Service von Cilium weiter.
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
@@ -7,7 +7,7 @@ metadata:
 spec:
   parentRefs:
     - name: http-gateway
-      # Gateway is shared and lives in kube-system.
+      # Das gemeinsam genutzte Gateway liegt in kube-system.
       namespace: kube-system
   hostnames:
     - "hubble.hs.local"
@@ -18,5 +18,5 @@ spec:
             value: /
       backendRefs:
         - name: hubble-ui
-          # Use the Service port (80), not the pod's target port.
+          # Verwendet den Service-Port (80), nicht den Ziel-Port des Pods.
           port: 80

@@ -1,24 +1,24 @@
-# Publishes the Argo CD web service at argocd.hs.local through the shared Gateway.
+# Stellt den Argo-CD-Webdienst unter argocd.hs.local über das gemeinsam genutzte Gateway bereit.
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: baseline-http-route-argocd-server
   namespace: argocd
   annotations:
-    # Argo CD route follows its HTTP server configuration and the Gateway.
+    # Die Argo-CD-Route folgt auf die HTTP-Serverkonfiguration und das Gateway.
     argocd.argoproj.io/sync-wave: "5"
   finalizers:
     - resources-finalizer.argocd.argoproj.io/background
 spec:
   project: default
   source:
-    # Contains the HTTPRoute; Gateway API CRDs and the Gateway are earlier dependencies.
+    # Enthält die HTTPRoute; Gateway-API-CRDs und Gateway sind vorherige Abhängigkeiten.
     repoURL: https://github.com/git67/k8s-argocd-bootstrap.git
     path: baseline/apps/http-route-argocd-server
     targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
-    # The backend Service and HTTPRoute are both in argocd.
+    # Backend-Service und HTTPRoute liegen beide im Namespace argocd.
     namespace: argocd
   syncPolicy:
     automated:

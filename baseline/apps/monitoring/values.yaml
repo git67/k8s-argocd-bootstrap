@@ -1,15 +1,17 @@
-# Minimal kube-prometheus-stack overrides for the baseline monitoring app.
+# Minimale Überschreibungen für kube-prometheus-stack in der Monitoring-Baseline.
 grafana:
-  # Deploy Grafana; chart-generated admin credentials are stored in a Kubernetes Secret.
+  # Stellt Grafana bereit; vom Chart erzeugte Admin-Zugangsdaten werden in einem Kubernetes-Secret gespeichert.
   enabled: true
+  # Initiales Grafana-Admin-Passwort; in gemeinsam genutzten oder produktiven Clustern stattdessen ein Secret verwenden.
+  adminPassword: "password"
   service:
-    # Expose only inside the cluster; the Gateway routes external requests.
+    # Nur innerhalb des Clusters erreichbar; externe Anfragen werden über das Gateway weitergeleitet.
     type: ClusterIP
 
 prometheus:
-  # Deploy Prometheus.
+  # Stellt Prometheus bereit.
   enabled: true
 
 alertmanager:
-  # Deploy Alertmanager.
+  # Stellt Alertmanager bereit.
   enabled: true

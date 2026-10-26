@@ -1,24 +1,24 @@
-# Publishes Grafana at grafana.hs.local through the shared Gateway.
+# Stellt Grafana unter grafana.hs.local über das gemeinsam genutzte Gateway bereit.
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: baseline-http-route-grafana
   namespace: argocd
   annotations:
-    # Route app wave: monitoring and the shared Gateway are prerequisites.
+    # Wave der Route-Application: Monitoring und das gemeinsam genutzte Gateway sind Voraussetzungen.
     argocd.argoproj.io/sync-wave: "6"
   finalizers:
     - resources-finalizer.argocd.argoproj.io/background
 spec:
   project: default
   source:
-    # Contains the HTTPRoute for the kube-prometheus-stack Grafana Service.
+    # Enthält die HTTPRoute für den Grafana-Service von kube-prometheus-stack.
     repoURL: https://github.com/git67/k8s-argocd-bootstrap.git
     path: baseline/apps/http-route-grafana
     targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
-    # Grafana is installed by kube-prometheus-stack in monitoring.
+    # Grafana wird von kube-prometheus-stack im Namespace monitoring installiert.
     namespace: monitoring
   syncPolicy:
     automated:
