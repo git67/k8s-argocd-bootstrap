@@ -1,17 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: baseline-http-route-hubble-ui
+  name: baseline-gateway
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "2"
+    argocd.argoproj.io/sync-wave: "0"
   finalizers:
-    - resources-finalizer.argocd.argoproj.io
+    - resources-finalizer.argocd.argoproj.io/background
 spec:
   project: default
   source:
     repoURL: https://github.com/git67/k8s-argocd-bootstrap.git
-    path: baseline/apps/http-route-hubble-ui
+    path: baseline/apps/gateway
     targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
