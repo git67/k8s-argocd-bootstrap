@@ -1,4 +1,4 @@
-# Leitet HTTP und HTTPS (TLS am Gateway terminiert) für argocd.hs.local an den Argo-CD-Server-Service weiter.
+# Leitet HTTPS für argocd.hs.local an den Argo-CD-Server-Service weiter.
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
@@ -7,11 +7,8 @@ metadata:
 spec:
   parentRefs:
     - name: http-gateway
-      # Das gemeinsam genutzte Gateway liegt in kube-system.
       namespace: kube-system
-      sectionName: http
-    - name: http-gateway
-      namespace: kube-system
+      # TLS wird am Gateway terminiert; der interne Argo-CD-Server verwendet HTTP.
       sectionName: https-argocd
   hostnames:
     - "argocd.hs.local"
