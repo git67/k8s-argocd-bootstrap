@@ -12,10 +12,25 @@ spec:
   gatewayClassName: cilium
   listeners:
     - name: http
-      # Nur HTTP; der Self-Signed-Issuer wird erst mit einem TLS-Listener bzw. Zertifikat verwendet.
       protocol: HTTP
       port: 80
       allowedRoutes:
         namespaces:
           # Erlaubt HTTPRoutes aus argocd, kube-system und monitoring.
           from: All
+    - name: https-argocd
+      # TLS wird am Gateway terminiert; das Zertifikat stammt aus 3-argocd-certificate.yaml.
+      protocol: HTTPS
+      port: 443
+      hostname: argocd.hs.local
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - kind: Secret
+            name: argocd-hs-local-tls
+      allowedRoutes:
+        namespaces:
+          from: Selector
+          selector:
+            matchLabels:
+              kubernetes.io/metadata.name: argocd
