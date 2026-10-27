@@ -19,7 +19,7 @@ spec:
   loadBalancerIPs: true
   # Netzwerkschnittstelle des Nodes im Netz 192.168.56.0/24; muss der tatsächlichen Host-Schnittstelle entsprechen.
   interfaces:
-    - ^enp0s5$
+    - ^(enp0s5|enp0s3)$
   # Gilt nur für Linux-Kubernetes-Nodes.
   nodeSelector:
     matchExpressions:
